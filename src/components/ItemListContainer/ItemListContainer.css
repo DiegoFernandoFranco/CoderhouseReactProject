@@ -1,0 +1,26 @@
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    /* background-color: red; */
+    height: calc(100vh - 80px);
+
+}
+.itemListContainerLogo {
+    /* margin: 20vh auto 20px 0; */
+    text-align:left;
+    height: 300px;
+    animation: logo-spin infinite 20s linear;
+}
+
+@keyframes logo-spin {
+from {
+  transform: rotate(360deg);
+}
+to {
+  transform: rotate(0deg);
+}
+}
