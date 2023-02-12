@@ -1,100 +1,118 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import {getFirestore, getDocs, collection, query, where} from 'firebase/firestore'
 import './ItemListContainer.css';
+import Loading from '../../components/Loading/Loading';
 
-import ItemCount from '../../components/ItemCount/ItemCount';
 import ItemList from '../../components/ItemList/ItemList';
-
-const arrayProducts = [ {
-    id: 1,
-    title: "Zapatilla 1",
-    description: "Model One",
-    price: 500,
-    category: "Zapatillas",
-    stock: 5,
-    pictureUrl: '/images/zapatillas.png',
-},
-{
-    id: 2,
-    title: "Zapatilla 2",
-    description: "Model One",
-    price: 1000,
-    category: "Zapatillas",
-    stock: 5,
-    pictureUrl: '/images/zapatillas.png',
-},
-{
-    id: 3,
-    title: "Ojota 1",
-    description: "Model One",
-    price: 1500,
-    category: "Ojotas",
-    stock: 5,
-    pictureUrl: '/images/ojotas.png',
-},
-{
-    id: 4,
-    title: "Ojota 2",
-    description: "Model One",
-    price: 2000,
-    category: "Ojotas",
-    stock: 5,
-    pictureUrl: '/images/ojotas.png',
-},
-{
-    id: 5,
-    title: "Zapato 1",
-    description: "Model One",
-    price: 2500,
-    category: "Zapatos",
-    stock: 5,
-    pictureUrl: '/images/zapatos.png',
-},
-{
-    id: 6,
-    title: "Zapato 2",
-    description: "Model One",
-    price: 2150,
-    category: "Zapatos",
-    stock: 5,
-    pictureUrl: '/images/zapatos.png',
-}
-];
 
 const ItemListContainer = ({greeting}) => {
     const [products, setProducts] = useState([]);
+    // const [filteredProducts, setFilteredProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const {category} = useParams();
 
-    const onAdd = (cantidad) => {
-        cantidad === 1 
-        ? console.log(`${cantidad} Item agregados al Carrito`)
-        : console.log(`${cantidad} Items agregados al Carrito`)
+    // const ComponentToRender = loading === true ? Loading : ItemList;
+
+    const getProducts = () => {
+        const db = getFirestore();
+        const querySnapshot = collection(db, 'items');
+
+        
+            if (category) {
+                const newConfiguration = query(querySnapshot, where('categoryId','==', category ));
+                getDocs(newConfiguration)
+                .then((response) => {
+                    const data = response.docs.map((doc) => {
+                        console.log(doc.data());
+                        return {id: doc.id, ...doc.data()};
+                    });
+                    setLoading(false);
+                    // console.log(data);
+                    setProducts(data);
+                })
+                .catch((error) => {console.log(error)});
+            }   else {
+                getDocs(querySnapshot)
+                    .then((response) => {
+                        const data = response.docs.map((doc) => {
+                            console.log(doc.data());
+                            return {id: doc.id, ...doc.data()};
+                        });
+                        setLoading(false);
+                        // console.log(data);
+                        setProducts(data);
+                    })
+                    .catch((error) => {console.log(error)})
+            }
         
     };
 
-    const getProducts = new Promise ((resolve, reject) => {
-        setTimeout(() => {
-            resolve(arrayProducts)
-            reject('Fallaste')            
-        }, 2000)
-        
-    }) 
+    // const getProducts = fetch('https://dummyjson.com/products',
+    // {
+    //     method: 'GET',
+    // }
+    // );
+    // esto anda***********
+    // useEffect(() => {
+    //     getProducts
+    //         .then(res => res.json())
+    //         .then((resp) => {
+    //             console.log(resp.products)
+    //             setProducts(resp.products)           
+    //         })           
+    //         .catch((error) => {
+    //             console.log(error)
+    //         })
+    // }, []);
 
     useEffect(() => {
-        getProducts
-            .then((response) => {
-                setProducts(response);
-                console.log(response);
-            })
-            .catch((error) => console.log(error) )
-    }, [])
+        getProducts();
+    }, [category])
+
+    // useEffect(() => {
+    //     if (category) {
+    //         const removeCharacters = category.includes('%20')
+    //     }
+    // })
+    // useEffect(() => {   
+        
+    //     if(category){
+
+    //         getProducts
+    //             .then(res => res.json())
+    //             .then((resp) => {
+    //                 console.log(resp.products)
+    //                 console.log(resp.products.filter(res => res.category === category))
+    //                 setProducts(resp.products.filter(res => res.category === category)) 
+    //             })           
+    //             .catch((error) => {
+    //                 console.log(error)
+    //             })
+    //     }   else {
+    //         getProducts
+    //                 .then(res => res.json())
+    //                 .then((resp) => {
+    //                     console.log(resp.products)
+    //                     setProducts(resp.products)           
+    //                 })           
+    //                 .catch((error) => {
+    //                     console.log(error)
+    //                 })
+    //     }    
+    // }, [category]);
 
     return (    
-        <div>
-            <ItemCount initial={1} stock={5} onAdd={onAdd}/>
-            <div className='contenedor'>                      
-                {/* <img className='itemListContainerLogo' alt='logo' src='./images/logo.png' />
-                <h1>ItemListContainer</h1> */}
-                <h2>{greeting}</h2>
-                <ItemList products={products} />                
+        <div className='contenedor'>
+            
+            <div> 
+                {loading ? (
+                    <Loading />
+                ) :(
+                    <ItemList products={products} productos={products} />
+                )}
+                {/* <ComponentToRender productos={category ? filteredProducts : products} /> */}
+                {/* <ItemList products={products} />                 */}
             </div>
         </div>    
     )
