@@ -1,26 +1,26 @@
 import './CartWidget.css';
 import { useContext, useEffect, useState } from 'react';
-import { cartContext } from '../../context/cartContext';
+import { CartContext } from '../../context/CartContext';
 
 const CartWidget = () => {
-    const {cart} = useContext(cartContext);
+    const {cart} = useContext(CartContext);
     const [total, setTotal] = useState(0);
 
     useEffect(() => {
         setTotal(
-            cart?.reduce((prev,curr) => {
-                console.log(prev, curr);
+            cart?.reduce((prev, curr) => {
+               
                 return prev + curr.quantity;
             }, 0)
-        )
+        );
 
     },[cart])
 
     return (
         <div className='cartContainer'>
-            <img className='cartImage' alt='carrito' src='./images/carrito.png' />
-            <div className='cartItemContainer'>
-                <div className='cartItem'>{cart.length}</div>
+            <img className='cartImage' alt='carrito' src='/images/carrito.png' />
+            <div className='cartItemContainer'>                
+                <div className='cartItem'>{total}</div>
                 {/* <div className='cartItem'>555</div> */}
             </div>
         </div>

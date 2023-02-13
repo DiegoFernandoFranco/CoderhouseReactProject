@@ -6,7 +6,7 @@ import Error from './pages/Error/Error';
 import Cart from './pages/Cart/Cart';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import CartProvider from './context/cartProvider';
+import CartProvider from './context/CartProvider';
 
 
 function App() {
