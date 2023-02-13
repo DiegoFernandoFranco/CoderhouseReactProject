@@ -1,6 +1,101 @@
-.shoppingCartContainer {
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.controlPanelCart {
     display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    
+}
+.shoppingCartItems {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* width: 100%;     */
+    /* background-color: gray; */
+    /* margin-bottom: 20px; */
+    
+}
+.shoppingCartItems div {
+    justify-content: center;
+    background-color: red;
+    /* height: 150px; */
+    /* margin: 10px 10px; */
+}
+.shoppingCartItems img{
+    background-color: blue;
+    
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: center; */
+    width: 100px;
+}
+.shoppingCartItems2{
+    margin: 0 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 330px;
+    /* width: 100px; */
+    /* margin: 50px 0; */
+    /* justify-content: center; */
+
+}
+.shoppingCartItems2 img {
+    margin: 10px 0;
+
+}
+.shoppingCartButtons {
+    /* margin: 0;
+    padding: 0; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 160px;
+
+}
+.toTheCarritoCart {
+    background-color: black;
     color: white;
-    margin-top: 80px;
-    margin-left: 20px;
+    /* width: 120px; */
+}
+.shoppingCartButtons button {
+    height: 30px;
+    /* font-size: 10px; */
+    font-weight: bolder;
+    width: 150px;
+}
+.toTheCarritoCart:hover {
+    background-color: greenyellow;
+    color: black;
+}
+
+.buttonQuitar {
+    /* width: 100px; */
+    background-color: black;
+    color: white;
+    
+}
+.buttonQuitar:hover {
+    background-color: aquamarine;
+    color: black;
+    
+}
+
+.controlPanelCart button {
+    margin: 0 15px;
+    width: 150px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    
+}
+.controlPanelCart button:hover {
+    background-color: red;
+    
 }

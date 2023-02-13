@@ -1,0 +1,59 @@
+* {
+    color: white;
+    text-decoration: none;    
+}
+.tarjetaProductoDetalle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    width: 550px;
+    list-style: none;
+    margin: 10px 20px;
+    background-color: rgb(57, 54, 54);
+    border: 2px solid rgb(75, 73, 73);
+}
+.tarjetaProductoDetalle img {
+
+    margin: 20px auto;
+}
+.tarjetaProductoDetalle h4 {
+    /* margin-left: 20px; */
+    text-align: left;
+    list-style: none;
+    
+}
+.tarjetaProductoDetalle h5 {
+    text-align: left;
+    /* margin-left: 20px; */
+    list-style: none;
+    
+}
+.detalleProductoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.botoneraCarrito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    width: 150px;
+}
+.botoneraCarrito button {
+    
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 30px;
+    font-size: 15px;
+    font-weight: bolder;
+    
+    
+}
+
+.botoneraCarrito button:hover {
+    background-color: greenyellow;
+    color: black;
+}

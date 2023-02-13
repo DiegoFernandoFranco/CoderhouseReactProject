@@ -1,3 +1,4 @@
+import './ItemDetail.css';
 import ItemCount from "../ItemCount/ItemCount";
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
@@ -15,19 +16,33 @@ const ItemDetail = ({ product }) => {
 
     };
 
+    // <li className='tarjetaProducto'>
+    //         <h2>{product.id}</h2>
+    //         <img alt={products.title} src={products.imageId} width='150px' />
+    //         <h4>{products.title}</h4>
+    //         <h4>{products.categoryId}</h4>
+    //         <h5>{products.description}</h5>
+    //         <h5>Stock: {products.stock}</h5>
+    //         <h4>Precio: ${products.price}</h4>
+
+    //     </li>
     return (
-        <div>
-            <img alt={product.title} src={product.imageId} width='150px' />
-            <h3>{product.title}</h3>
-            <h3>{product.description}</h3>
-            <h3>{`Categoria: ${product.categoryId}`}</h3>
-            <h3>{`Precio: $${product.price}`}</h3>
-            <h5>{`Stock: ${product.stock}`}</h5>
-            {/* <h4>{product.description}</h4> */}
-            <ItemCount contador={contador} actualizaValor={setContador} initial={1} stock={product.stock} onAdd={onAdd} />
-            <div>
-                <button onClick={() => addItem(product, contador)} style={{ color: 'black' }}>To the Carrito</button>
+        <div className='detalleProductoContainer'>
+            <div className='tarjetaProductoDetalle'>
+                <img alt={product.title} src={product.imageId} />
+                <div>
+                    <h5>Id del Producto: {product.id}</h5>
+                    <h4>{product.title}</h4>
+                    <h5>{product.description}</h5>
+                    <h5>Categoria: {product.categoryId}</h5>
+                    <h5>Stock: {product.stock} {product.stock == 1 ? 'Unidad' : 'Unidades'} </h5>
+                    <h4>Precio: ${product.price}</h4>
+                </div>
             </div>
+                <div className='botoneraCarrito'>
+                    <ItemCount contador={contador} actualizaValor={setContador} initial={1} stock={product.stock} onAdd={onAdd} />
+                    <button onClick={() => addItem(product, contador)}>To the Carrito</button>
+                </div>
         </div>
     )
 }

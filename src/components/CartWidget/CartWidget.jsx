@@ -15,14 +15,18 @@ const CartWidget = () => {
         );
 
     },[cart])
+    
 
     return (
         <div className='cartContainer'>
             <img className='cartImage' alt='carrito' src='/images/carrito.png' />
-            <div className='cartItemContainer'>                
-                <div className='cartItem'>{total}</div>
-                {/* <div className='cartItem'>555</div> */}
-            </div>
+            {total !== 0
+            ?   <div className='cartItemContainer'>                
+                    <div className='cartItem'>{total}</div>
+                </div>
+            : null}
+
+             
         </div>
         // <h2>CartWidget</h2>
     )

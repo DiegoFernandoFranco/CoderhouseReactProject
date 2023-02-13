@@ -1,3 +1,30 @@
 * {
     color: white;
+    text-decoration: none;
+}
+
+.tarjetaProducto {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    height: 300px;
+    width: 250px;
+    list-style: none;
+    margin: 10px 20px;
+    background-color: rgb(57, 54, 54);
+    border: 2px solid rgb(75, 73, 73);
+}
+.tarjetaProducto img {
+
+    margin: 20px auto;
+}
+.tarjetaProducto h4 {
+    margin-left: 20px;
+    list-style: none;
+    
+}
+.tarjetaProducto h5 {
+    margin-left: 20px;
+    list-style: none;
+    
 }

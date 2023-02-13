@@ -21,9 +21,9 @@ const Cart = () => {
 
         const newOrder = {
             buyer: {
-            name: 'Nombre Inventado',
-            phone: 'telefono Inventado',
-            email: 'email Inventado',
+            name: 'Bruce Willis',
+            phone: '555-5555',
+            email: 'DuroDeMatar@NakatomiPlaza.com',
         },
         items: cart.map((product) => {
             const {name, price, id} = product;
@@ -52,22 +52,30 @@ const Cart = () => {
     };
 
     return (
-        <div className='shoppingCartContainer'>            
-            {cart.map((product) => (
-                <div key={product?.id} style={{width:150}}>
-                    <img src={product?.image} alt='imagen de producto' width='100px'/>
-                    <h3>{product?.name}</h3>                    
-                    <h4>{product?.quantity}</h4>
-                    <h5>{product?.price}</h5>
-                    <ItemCount />
-                    <button style={{color: 'black'}} onClick={() => removeItem(product.id)}>Quitar Producto</button>
-                </div>
-            ))}
-            <div>
-                <button style={{color: 'black'}} onClick={() => clear()}>Limpiar Carrito</button>
+        <div>
+
+            <div className='controlPanelCart'>
+                <button  onClick={() => clear()}>Limpiar Carrito</button>            
+                <button onClick={() => createOrder()} >Crear Orden</button>
             </div>
-            <div>
-                <button onClick={() => createOrder()} style={{color: 'black'}} >Crear Orden</button>
+            <div className='shoppingCartItems'>            
+                {cart.map((product) => (
+                    <div className='shoppingCartItems2' key={product?.id} >
+                        <img src={product?.image} alt='imagen de producto'/>
+                        <div>
+                            <h3>{product?.name}</h3>
+                            <h5>Stock: {product?.stock}</h5>                            
+                            <h5>En Carrito: {product?.quantity}</h5>
+                            <h5>Precio: ${product?.price}</h5>
+                            <h5>Total: ${product?.price * product.quantity}</h5>
+                        </div>
+                        <div className='shoppingCartButtons'>
+                            <ItemCount />
+                            <button className='toTheCarritoCart'>To the Carrito</button>
+                            <button className='buttonQuitar' onClick={() => removeItem(product.id)}>Quitar Producto</button>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     )
