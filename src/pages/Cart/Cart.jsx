@@ -1,11 +1,11 @@
 import './Cart.css';
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
-import ItemCount from "../../components/ItemCount/ItemCount";
+// import ItemCount from "../../components/ItemCount/ItemCount";
 import {collection, addDoc, getFirestore} from 'firebase/firestore';
 
 const Cart = () => {
-    const {cart, removeItem, clear} = useContext(CartContext);
+    const {cart, removeItem, clear, contador, quitarUniCart, agregarUniCart} = useContext(CartContext);
     const [order, setOrder] = useState({});
 
     // console.log(cart);
@@ -70,8 +70,22 @@ const Cart = () => {
                             <h5>Total: ${product?.price * product.quantity}</h5>
                         </div>
                         <div className='shoppingCartButtons'>
-                            <ItemCount />
-                            <button className='toTheCarritoCart'>To the Carrito</button>
+
+
+                            <div className='itemCountContainer'>
+                                <div className='botonera'>
+                                    <button onClick={() => quitarUniCart(product)}>-</button>
+                                    {/* <button onClick={() => restar()}>--</button> */}
+                                    <h3>{contador}</h3>
+                                    <button onClick={() => agregarUniCart(product)}>+</button>
+                                </div>
+
+                            </div>
+
+
+                            {/* <ItemCount /> */}
+                            {/* <ItemCount contador={contador} actualizaValor={setContador} initial={1} stock={product.stock} onAdd={onAdd} /> */}
+                            {/* <button className='toTheCarritoCart'>To the Carrito</button> */}
                             <button className='buttonQuitar' onClick={() => removeItem(product.id)}>Quitar Producto</button>
                         </div>
                     </div>
@@ -82,3 +96,4 @@ const Cart = () => {
 }
 
 export default Cart;
+

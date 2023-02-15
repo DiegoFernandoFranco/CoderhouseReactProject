@@ -64,12 +64,13 @@
     /* width: 120px; */
 }
 .shoppingCartButtons button {
+    margin-top: 10px;
     height: 30px;
     /* font-size: 10px; */
     font-weight: bolder;
     width: 150px;
 }
-.toTheCarritoCart:hover {
+.shoppingCartButtons button:hover {
     background-color: greenyellow;
     color: black;
 }

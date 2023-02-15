@@ -24,7 +24,7 @@ const ItemListContainer = ({greeting}) => {
                 getDocs(newConfiguration)
                 .then((response) => {
                     const data = response.docs.map((doc) => {
-                        console.log(doc.data());
+                        // console.log(doc.data());
                         return {id: doc.id, ...doc.data()};
                     });
                     setLoading(false);
@@ -36,7 +36,7 @@ const ItemListContainer = ({greeting}) => {
                 getDocs(querySnapshot)
                     .then((response) => {
                         const data = response.docs.map((doc) => {
-                            console.log(doc.data());
+                            // console.log(doc.data());
                             return {id: doc.id, ...doc.data()};
                         });
                         setLoading(false);
