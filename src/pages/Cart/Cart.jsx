@@ -1,11 +1,11 @@
 import './Cart.css';
 import { useContext, useState } from "react";
-import { CartContext } from "../../context/CartContext";
+import { cartContext } from "../../context/cartContext";
 // import ItemCount from "../../components/ItemCount/ItemCount";
 import {collection, addDoc, getFirestore} from 'firebase/firestore';
 
 const Cart = () => {
-    const {cart, removeItem, clear, contador, quitarUniCart, agregarUniCart} = useContext(CartContext);
+    const {cart, removeItem, clear, contador, quitarUniCart, agregarUniCart} = useContext(cartContext);
     const [order, setOrder] = useState({});
 
     // console.log(cart);

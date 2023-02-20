@@ -1,9 +1,9 @@
 import './CartWidget.css';
 import { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../context/CartContext';
+import { cartContext } from '../../context/cartContext';
 
 const CartWidget = () => {
-    const {cart} = useContext(CartContext);
+    const {cart} = useContext(cartContext);
     const [total, setTotal] = useState(0);
 
     useEffect(() => {

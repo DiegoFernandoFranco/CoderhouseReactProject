@@ -6,12 +6,12 @@ import Error from './pages/Error/Error';
 import Cart from './pages/Cart/Cart';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import CartProvider from './context/CartProvider';
+import cartProvider from './context/cartProvider';
 
 
 function App() {
   return (
-    <CartProvider>
+    <cartProvider>
       <BrowserRouter>
         <NavBar />
         <Routes>
@@ -22,7 +22,7 @@ function App() {
           <Route path='cart' element={<Cart/>} />
         </Routes>
       </BrowserRouter>
-    </CartProvider>
+    </cartProvider>
 
     // <div className="App">
     //   <header className="App-header">
