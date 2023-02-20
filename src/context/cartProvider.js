@@ -14,7 +14,7 @@ const CartProvider = ({children}) => {
         if(product) {
             product.quantity += quantity;
             if (product.quantity > product.stock) {
-                alert('no hay mas stock disponible');
+                alert('No hay mas stock disponible');
                 return;
             }
 
