@@ -1,54 +1,92 @@
 import './Cart.css';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { cartContext } from "../../context/cartContext";
 // import ItemCount from "../../components/ItemCount/ItemCount";
-import {collection, addDoc, getFirestore} from 'firebase/firestore';
+import {collection, addDoc, getFirestore, doc, updateDoc} from 'firebase/firestore';
 
 const Cart = () => {
     const {cart, removeItem, clear, contador, quitarUniCart, agregarUniCart} = useContext(cartContext);
     const [order, setOrder] = useState({});
+    const db = getFirestore();
 
-    // console.log(cart);
+    useEffect(() => {
+        setOrder( {
+            buyer: {
+                name: 'Bruce Willis',
+                phone: '555-5555',
+                email: 'DuroDeMatar@NakatomiPlaza.com',
+            },
+            items: cart.map((product) => {
+                const {name, price, id} = product;
+                return {name, price, id}
+            }),
+            total: cart.reduce((acc, current) => 
+            acc + current.price * current.quantity, 0)
+        });
+    }, [cart]);
     
     if(cart.lenght === 0) {
         return <h1>Carrito Vacio</h1>
     }
 
     const createOrder = () => {
-        console.log('pruebaOrder')
-        const db = getFirestore();
+        // console.log('pruebaOrder')
+        
         const querySnapshot = collection(db, 'orders');
 
-        const newOrder = {
-            buyer: {
-            name: 'Bruce Willis',
-            phone: '555-5555',
-            email: 'DuroDeMatar@NakatomiPlaza.com',
-        },
-        items: cart.map((product) => {
-            const {name, price, id} = product;
-            return {name, price, id}
-        }),
+        // const newOrder = {
+        //     buyer: {
+        //     name: 'Bruce Willis',
+        //     phone: '555-5555',
+        //     email: 'DuroDeMatar@NakatomiPlaza.com',
+        // },
         // items: cart.map((product) => {
-        //     return {
-        //         name: product.name,
-        //         price: product.price,
-        //         id: product.id
-        //     }
-
+        //     const {name, price, id} = product;
+        //     return {name, price, id}
         // }),
-        total: cart.reduce((acc, current) => 
-            acc + current.price * current.quantity, 0)
-        }
+        // // items: cart.map((product) => {
+        // //     return {
+        // //         name: product.name,
+        // //         price: product.price,
+        // //         id: product.id
+        // //     }
 
-        setOrder(newOrder);
+        // // }),
+        // total: cart.reduce((acc, current) => 
+        //     acc + current.price * current.quantity, 0)
+        // }
 
-        addDoc(querySnapshot, newOrder)
+        // setOrder(newOrder);
+
+        addDoc(querySnapshot, order)
         .then((response) => {
             console.log(response);
+            updateStockProducts();
             alert('Nueva Orden Creada Nro: '+ response.id);
         })
         .catch((error) => console.log(error));
+    };
+
+
+    const updateStockProducts = () => {
+        cart.forEach((product) => {
+            const querySnapshot = doc(db, 'items', product.id);
+
+            updateDoc(querySnapshot, {
+                categoryId: product.category,
+                description: product.description,
+                imageId: product.image,
+                price: product.price,
+                stock: product.stock - product.quantity,
+                title: product.name,
+            })
+                .then(() => {
+                    console.log('Stock Actualizado')
+                    clear()
+                    console.log('Borrar Carrito ya que se hizo la orden')
+                })
+                .catch((error) => console.log(error))
+        })
     };
 
     return (

@@ -26,6 +26,7 @@ const CartProvider = ({children}) => {
                 name: item.title,
                 price: item.price,
                 quantity: quantity,
+                description: item.description,
                 image: item.imageId,
                 category: item.categoryId,
                 stock: item.stock,
