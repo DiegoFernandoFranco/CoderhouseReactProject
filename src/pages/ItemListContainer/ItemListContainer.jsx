@@ -16,12 +16,11 @@ const ItemListContainer = ({greeting}) => {
 
     const getProducts = () => {
         const db = getFirestore();
-        const querySnapshot = collection(db, 'items');
+        const queryBase = collection(db, 'items');
+        const querySnapshot = category ? query(queryBase, where ('categoryId', '==', category)) : queryBase;
+        // const querySnapshot = collection(db, 'items');
 
-        
-            if (category) {
-                const newConfiguration = query(querySnapshot, where('categoryId','==', category ));
-                getDocs(newConfiguration)
+        getDocs(querySnapshot)
                 .then((response) => {
                     const data = response.docs.map((doc) => {
                         // console.log(doc.data());
@@ -32,19 +31,33 @@ const ItemListContainer = ({greeting}) => {
                     setProducts(data);
                 })
                 .catch((error) => {console.log(error)});
-            }   else {
-                getDocs(querySnapshot)
-                    .then((response) => {
-                        const data = response.docs.map((doc) => {
-                            // console.log(doc.data());
-                            return {id: doc.id, ...doc.data()};
-                        });
-                        setLoading(false);
-                        // console.log(data);
-                        setProducts(data);
-                    })
-                    .catch((error) => {console.log(error)})
-            }
+        
+            // if (category) {
+            //     const newConfiguration = query(querySnapshot, where('categoryId','==', category ));
+            //     getDocs(newConfiguration)
+            //     .then((response) => {
+            //         const data = response.docs.map((doc) => {
+            //             // console.log(doc.data());
+            //             return {id: doc.id, ...doc.data()};
+            //         });
+            //         setLoading(false);
+            //         // console.log(data);
+            //         setProducts(data);
+            //     })
+            //     .catch((error) => {console.log(error)});
+            // }   else {
+            //     getDocs(querySnapshot)
+            //         .then((response) => {
+            //             const data = response.docs.map((doc) => {
+            //                 // console.log(doc.data());
+            //                 return {id: doc.id, ...doc.data()};
+            //             });
+            //             setLoading(false);
+            //             // console.log(data);
+            //             setProducts(data);
+            //         })
+            //         .catch((error) => {console.log(error)})
+            // }
         
     };
 

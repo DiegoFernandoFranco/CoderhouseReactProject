@@ -36,11 +36,12 @@ const Cart = () => {
 
     const createOrder = (event) => {
 
-        if (formValue.name === '' || formValue.phone === '' || formValue.email === '') {
-            alert('Falta llenar el formulario para crear la Order')
+        if (formValue.name === '') {
+            console.log('Campo Nombre Vacio')
         }   else {
             console.log('Nombre Ingresado Correctamente')
-            // event.preventDefault();
+        };
+        // event.preventDefault();
         // console.log('pruebaOrder')
         
         const querySnapshot = collection(db, 'orders');
@@ -81,8 +82,6 @@ const Cart = () => {
             alert('Nueva Orden Creada Nro: '+ response.id);
         })
         .catch((error) => console.log(error));
-        };
-        
     };
    
 

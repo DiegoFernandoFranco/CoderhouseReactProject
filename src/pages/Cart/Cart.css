@@ -100,3 +100,16 @@
     background-color: red;
     
 }
+
+.formulario {
+    text-align: center;
+    /* background-color: red; */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+.formulario input {
+    color: black;
+    margin: 0 10px;
+}

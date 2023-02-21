@@ -1,6 +1,8 @@
 # Entrega Final Proyecto React - Diego Franco
 
 se utilizo solo React y Css.
+Deje mucho codigo sin usar que antes funcionaba, lo hice para que veas el trabajo inmenso que hice, jaja.
+Si es necesario borro todo lo innecesario.
 
 # Link al Video del Proyecto
 ! [Alt Text] (https://drive.google.com/file/d/1K76La6Y2DSHPL20ddzCiO0JqTd3T-jNx/view?usp=sharing)
